@@ -1,0 +1,15 @@
+server {
+    listen 80;
+    server_name localhost;
+
+    location /images/ {
+        root /var/www;
+        access_log /var/log/nginx/jpg_access.log;
+    }
+
+    location / {
+        proxy_pass http://127.0.0.1:8888;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+}
